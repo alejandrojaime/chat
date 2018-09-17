@@ -7,11 +7,18 @@ export default class Chat {
         this.history = new History();
         this.users = new Users();
 
+        this.ip = false;
+
         this._container = data.container;
 
         this.title = window.document.title;
 
         this.socket = io.connect("192.168.1.39:8080", { nsp: '/alex/chat/server/', forceNew: true });
+        this.socket.on('ip', (data) => {
+            if (obj.ip === false) {
+                obj.ip = data.ip;
+            }
+        });
         this.socket.on('own-message', (data) => {
             obj.getOwnlMessage(data);
             obj.history.pushMessage(data.ip, data.message, 'own');
@@ -53,9 +60,30 @@ export default class Chat {
             }
         });
 
+        this.writing = '';
+        this.socket.on('updateWriting', (data) => {
+
+            data.conectados = data.conectados.replace(obj.ip, '');
+            if (obj.writing != data.conectados) {
+                obj.writing = data.conectados;
+            }
+            this.users.getAllUsersInArray(obj.writing.split(','), (result) => {
+                let s = '';
+                for (let i = 0; i < result.length; i++) {
+                    if (result[i] != "") {
+                        s += result[i] + ' est&aacute; escribiendo...<br>';
+                    }
+                }
+                if (s != this.infoLeftCell.innerHTML) {
+                    this.infoLeftCell.innerHTML = s;
+                }
+            });
+        });
+
 
         setInterval(() => {
             obj.socket.emit('pingConnected');
+            // obj.socket.emit('pingWriting');
         }, 2000);
 
         this.socket.on('pingConnected', (data) => {
@@ -105,10 +133,8 @@ export default class Chat {
 
     createChat() {
         let obj = this;
-
         this.container = document.createElement('div');
         this.container.classList.add('container');
-
 
         //información sobre usuarios conectados
         this.info = document.createElement('div');
@@ -125,9 +151,6 @@ export default class Chat {
         }, { pasive: false })
         this.connectedUsers = document.createElement('div');
         this.connectedUsers.classList.add('connectedUsers');
-
-
-
 
         this.themes = document.createElement('div');
         this.themes.classList.add('themes');
@@ -158,8 +181,6 @@ export default class Chat {
         this.info.appendChild(this.infoRightCell);
         this.container.appendChild(this.info);
 
-
-
         //contenedor de los mensajes
         this.chat = document.createElement('div');
         this.chat.classList.add('chat');
@@ -176,9 +197,6 @@ export default class Chat {
 
         this.container.appendChild(this.chat);
 
-
-
-
         this.controls = document.createElement('div');
         this.controls.classList.add('controls');
 
@@ -188,6 +206,14 @@ export default class Chat {
             let ev = e || event || window.event
             if (ev.keyCode == 13 && !ev.shiftKey) {
                 obj.sendbutton.click();
+                obj.socket.emit('stop-writing');
+            }
+        });
+        this.textbox.addEventListener('input', () => {
+            if (obj.textbox.value && obj.textbox.value.length > 0) {
+                obj.socket.emit('sendWriting');
+            } else {
+                obj.socket.emit('stop-writing');
             }
         });
 
@@ -200,10 +226,9 @@ export default class Chat {
             if ((text.replace(/\s/g, '').length)) {
                 obj.socket.emit('new-message', { message: text });
                 obj.textbox.value = '';
+                obj.socket.emit('stop-writing');
             }
         });
-
-
 
         this.controls.appendChild(this.textbox);
         this.controls.appendChild(this.sendbutton);
