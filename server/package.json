@@ -1,16 +1,16 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.3",
-    "socket.io": "^2.1.1"
-  },
-  "scripts": {
-    "start": "node main.js"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.3",
+        "socket.io": "^2.1.1"
+    },
+    "scripts": {
+        "start": "node main.js"
+    }
 }
