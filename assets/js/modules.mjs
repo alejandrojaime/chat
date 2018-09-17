@@ -23,7 +23,7 @@ export default class Chat {
             obj.getOwnlMessage(data);
             obj.history.pushMessage(data.ip, data.message, 'own');
         });
-        this.changeFavicon('grey');
+
         let interval;
         this.socket.on('external-message', (data) => {
             obj.getExternalMessage(data);
@@ -161,14 +161,14 @@ export default class Chat {
         this.theme[0].addEventListener('click', () => {
             document.body.className = '';
             document.body.classList.add('white');
-        });
+        }, { pasive: false });
 
         this.theme[1] = document.createElement('div');
         this.theme[1].classList.add('theme', 'dark');
         this.theme[1].addEventListener('click', () => {
             document.body.className = '';
             document.body.classList.add('dark');
-        });
+        }, { pasive: false });
 
         for (let k in this.theme) {
             this.themes.appendChild(this.theme[k]);
@@ -208,14 +208,14 @@ export default class Chat {
                 obj.sendbutton.click();
                 obj.socket.emit('stop-writing');
             }
-        });
+        }, { pasive: false });
         this.textbox.addEventListener('input', () => {
             if (obj.textbox.value && obj.textbox.value.length > 0) {
                 obj.socket.emit('sendWriting');
             } else {
                 obj.socket.emit('stop-writing');
             }
-        });
+        }, { pasive: false });
 
         this.sendbutton = document.createElement('button');
         this.sendbutton.classList.add('sendbutton');
@@ -228,7 +228,7 @@ export default class Chat {
                 obj.textbox.value = '';
                 obj.socket.emit('stop-writing');
             }
-        });
+        }, { pasive: false });
 
         this.controls.appendChild(this.textbox);
         this.controls.appendChild(this.sendbutton);
