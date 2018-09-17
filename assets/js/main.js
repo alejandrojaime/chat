@@ -1,9 +1,9 @@
 import Chat from './modules.mjs';
-(async () => {
+(async() => {
 
-	const chat = Array();
-	document.querySelectorAll('chat').forEach((el)=>{
-		chat.push(new Chat({container: el}));
-	});
+    const chat = Array();
+    document.querySelectorAll('chat').forEach((el) => {
+        chat.push(new Chat({ container: el }));
+    });
 
 })();

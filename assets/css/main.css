@@ -1,26 +1,28 @@
-body{
-	margin: 0;
-	padding: 0;
+body {
+    margin: 0;
+    padding: 0;
     color: #333;
 }
 
-.dark{
+.dark {
     background-color: #333;
     color: #FFF;
     border-color: #FFF;
 }
-.white{
+
+.white {
     background-color: #FFF;
     color: #333;
     border-color: #333;
 }
 
-.themes{
+.themes {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
 }
-.theme{
+
+.theme {
     position: relative;
     display: inline-block;
     height: 14px;
@@ -30,9 +32,11 @@ body{
     vertical-align: middle;
     border: 1px solid;
 }
-.theme+.theme{
+
+.theme+.theme {
     margin-left: 5px;
 }
+
 .container {
     position: relative;
     display: block;
@@ -41,6 +45,7 @@ body{
     margin: 20px auto 0 auto;
     max-width: 500px;
 }
+
 .chat {
     width: 100%;
     height: calc(100% - 77px);
@@ -51,6 +56,7 @@ body{
     border-bottom: 0;
     box-sizing: border-box;
 }
+
 .info {
     display: table;
     width: 100%;
@@ -59,7 +65,8 @@ body{
     border-bottom: 0;
     box-sizing: border-box;
 }
-.infoIcon{
+
+.infoIcon {
     display: inline-block;
     vertical-align: middle;
     color: #0088ff;
@@ -73,19 +80,22 @@ body{
     -ms-user-select: none;
     user-select: none;
 }
-.left-cell{
+
+.left-cell {
     display: table-cell;
     text-align: left;
     padding: 3px 3px 0 3px;
     box-sizing: border-box;
 }
-.right-cell{
+
+.right-cell {
     display: table-cell;
     text-align: right;
     padding: 0 3px 3px 3px;
     box-sizing: border-box;
 }
-.connectedUsers{
+
+.connectedUsers {
     display: none;
     position: absolute;
     max-width: 90%;
@@ -98,13 +108,16 @@ body{
     text-align: right;
     color: #0088ff;
 }
-.connectedUsers.visible{
+
+.connectedUsers.visible {
     display: block;
 }
+
 .controls {
     display: table;
     width: 100%;
 }
+
 button.sendbutton.active {
     display: table-cell;
     width: 80px;
@@ -115,6 +128,7 @@ button.sendbutton.active {
     color: #FFF;
     font-size: 18px;
 }
+
 textarea.textbox {
     display: inline-block;
     width: calc(100% - 80px);
@@ -132,6 +146,7 @@ textarea.textbox {
     background-color: transparent;
     color: inherit;
 }
+
 .message {
     padding: 5px 10px;
     margin: 5px;
@@ -144,7 +159,7 @@ textarea.textbox {
     box-sizing: border-box;
 }
 
-.message a{
+.message a {
     position: relative;
     max-width: 500px;
     overflow: hidden;
@@ -153,43 +168,48 @@ textarea.textbox {
 }
 
 .message.own {
-	float: right;
-    background-color: rgba(0,255,0,.2);
+    float: right;
+    background-color: rgba(0, 255, 0, .2);
     border: 1px solid #a5c3a5;
 }
+
 .message.external {
     float: left;
-    background-color: rgb(0,0,255,.1);
+    background-color: rgb(0, 0, 255, .1);
     border: 1px solid #a8a8ff;
 }
+
 .chat::-webkit-scrollbar {
     width: 10px;
     background-color: transparent;
 }
+
 .chat::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
 .chat::-webkit-scrollbar-thumb {
     background-color: #0088ff;
     border-right: 1px solid #cecece;
     box-shadow: 0px 0px 0px 3px #FFF inset;
 }
+
 body.dark .chat::-webkit-scrollbar-thumb {
     background-color: #0088ff;
     border-right: 1px solid #cecece;
     box-shadow: 0px 0px 0px 3px #333 inset;
 }
 
-.message .name{
-    font-size: 10px;    
+.message .name {
+    font-size: 10px;
     margin-bottom: 2px;
 }
 
-@media all and (max-width: 600px){
-    .container{
+@media all and (max-width: 600px) {
+    .container {
         height: calc(100vh - 40px);
     }
-    textarea.textbox{
+    textarea.textbox {
         font-size: 16px;
     }
 }
